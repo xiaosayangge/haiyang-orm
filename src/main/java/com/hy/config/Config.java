@@ -1,12 +1,14 @@
 package com.hy.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
+import com.hy.annotation.CodeBearMapperScanner;
 import com.hy.interceptor.HyInterceptor;
 
 /**  
@@ -14,6 +16,7 @@ import com.hy.interceptor.HyInterceptor;
 * Creater by chenhaiyang on 2019年3月6日
 */
 @Configuration
+@CodeBearMapperScanner("com.hy.service.db")
 public class Config implements WebMvcConfigurer{
 
 	@Override
@@ -24,9 +27,5 @@ public class Config implements WebMvcConfigurer{
         registration.excludePathPatterns("/","/login","/error","/static/**","/logout");       //添加不拦截路径
     }
 	
-	@Bean
-	public ServerEndpointExporter serverEndpointExporter(){
-		return new ServerEndpointExporter();
-	}
 	
 }
